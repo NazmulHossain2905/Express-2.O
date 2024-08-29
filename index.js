@@ -1,7 +1,12 @@
+const morgan = require("morgan");
+const cors = require("cors");
 const Express = require("./lib/Express");
 
 const app = new Express();
 const port = 3000;
+
+app.use(cors());
+app.use(morgan("dev"));
 
 app.get(
   "/health",
