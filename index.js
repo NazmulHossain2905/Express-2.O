@@ -9,7 +9,7 @@ app.get(
   (req, res, next) => {
     req.body.checking = "checking......";
 
-    // next();
+    next();
   },
 
   (req, res) => {
@@ -17,6 +17,8 @@ app.get(
       success: true,
       message: "Server health is Wealth",
       checking: req.body?.checking,
+      method: req.method,
+      path: req.path,
       user: {
         name: "Nazmul Hossain",
         email: "nazmulhossain@gmail.com",
@@ -29,7 +31,39 @@ app.get(
 app.post("/user", (req, res) => {
   console.log(req.query);
 
-  res.status(200).json({ success: true, body: req.body });
+  res.status(201).json({
+    success: true,
+    body: req.body,
+    method: req.method,
+    path: req.path,
+  });
+});
+
+app.delete("/user", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Delete successfully",
+    method: req.method,
+    path: req.path,
+  });
+});
+
+app.put("/user", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Update successfully",
+    method: req.method,
+    path: req.path,
+  });
+});
+
+app.patch("/user", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Update successfully",
+    method: req.method,
+    path: req.path,
+  });
 });
 
 app.listen(port, () =>
